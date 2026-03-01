@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>TinyWin — Маленькие победы каждый день</title>
+    <meta name="description"
+        content="TinyWin помогает справляться с исполнительной дисфункцией. Разбивает задачи на микро-шаги и управляет вниманием.">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index.css" />
+</head>
+
+<body>
+
+    <!-- ======================== -->
+    <!--   AUTH SCREEN             -->
+    <!-- ======================== -->
+    <div id="screen-auth" class="screen active">
+        <main class="screen-inner glow-bg-center">
+            <div class="content-col">
+                <h1 class="splash-title">Tiny<span class="text-primary">Win</span></h1>
+                <p class="splash-tagline">Войди, чтобы сохранять прогресс</p>
+                <div class="spacer-md"></div>
+
+                <div class="auth-form" id="auth-form">
+                    <input type="email" id="auth-email" class="setting-input" placeholder="Email"
+                        autocomplete="email" />
+                    <input type="password" id="auth-password" class="setting-input"
+                        placeholder="Пароль (мин. 6 символов)" autocomplete="current-password" />
+                    <p class="auth-error" id="auth-error" style="display:none;"></p>
+                    <div class="spacer-sm"></div>
+                    <button class="btn-primary btn-wide" id="btn-login">Войти</button>
+                    <button class="btn-ghost" id="btn-register">Создать аккаунт</button>
+
+                    <div id="google-divider" style="display:flex; align-items:center; margin: 16px 0;">
+                        <div style="flex:1; height:1px; background: rgba(255,255,255,0.1);"></div>
+                        <div style="padding: 0 10px; font-size: 0.8rem; color: var(--text-500);">или</div>
+                        <div style="flex:1; height:1px; background: rgba(255,255,255,0.1);"></div>
+                    </div>
+
+                    <div id="google-signin-btn-wrap" style="min-height:40px; display:flex; justify-content:center;">
+                    </div>
+
+                    <button class="btn-ghost" id="btn-skip-auth"
+                        style="margin-top:16px;opacity:0.5;font-size:0.75rem;">Попробовать без регистрации</button>
+                </div>
+            </div>
+
+            <!-- Load Google Identity Services -->
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+            <footer class="screen-footer">
+                <p class="footer-quote">Focus is a choice.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ======================== -->
+    <!--   VERIFY EMAIL SCREEN    -->
+    <!-- ======================== -->
+    <div id="screen-verify" class="screen">
+        <main class="screen-inner glow-bg-center">
+            <div class="content-col">
+                <div class="splash-icon-wrap">
+                    <div class="splash-icon-circle">
+                        <span class="material-symbols-outlined icon-xl">mark_email_read</span>
+                    </div>
+                </div>
+                <h1 class="splash-title" style="font-size:1.6rem;">Подтверди email</h1>
+                <p class="splash-tagline" id="verify-subtitle">Код отправлен на your@email.com</p>
+                <div class="spacer-md"></div>
+
+                <div class="auth-form" id="verify-form">
+                    <input type="text" id="verify-code" class="setting-input" placeholder="6-значный код" maxlength="6"
+                        inputmode="numeric" autocomplete="one-time-code"
+                        style="text-align:center;font-size:1.5rem;letter-spacing:8px;font-weight:700;" />
+                    <p class="auth-error" id="verify-error" style="display:none;"></p>
+                    <div class="spacer-sm"></div>
+                    <button class="btn-primary btn-wide" id="btn-verify">Подтвердить</button>
+                    <button class="btn-ghost" id="btn-resend" style="margin-top:8px;font-size:0.8rem;">Отправить код
+                        повторно</button>
+                </div>
+            </div>
+            <footer class="screen-footer">
+                <p class="footer-quote">Проверьте папку «Спам»</p>
+            </footer>
+        </main>
+    </div>
+    <!-- ======================== -->
+    <!--   SPLASH SCREEN          -->
+    <!-- ======================== -->
+    <div id="screen-splash" class="screen">
+        <main class="screen-inner glow-bg-center">
+            <div class="content-col">
+                <div class="splash-icon-wrap">
+                    <div class="splash-icon-circle">
+                        <span class="material-symbols-outlined icon-xl">self_improvement</span>
+                    </div>
+                </div>
+                <h1 class="splash-title">Tiny<span class="text-primary">Win</span></h1>
+                <p class="splash-tagline">Маленькие победы.<br>Большие результаты.</p>
+                <div class="spacer-lg"></div>
+                <button class="btn-primary btn-wide" id="btn-start">
+                    <span>Начать</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
+            <!-- Welcome back overlay (hidden by default) -->
+            <div class="welcome-back-overlay" id="welcome-back" style="display:none;">
+                <div class="welcome-back-card">
+                    <span class="material-symbols-outlined icon-lg text-primary">waving_hand</span>
+                    <p class="welcome-text" id="welcome-text">С возвращением! Ты остановился на шаге...</p>
+                    <button class="btn-primary btn-wide" id="btn-resume">Продолжить</button>
+                    <button class="btn-ghost" id="btn-new-task">Начать новое</button>
+                </div>
+            </div>
+            <footer class="screen-footer">
+                <p class="footer-quote">Focus is a choice.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ======================== -->
+    <!--   CAPTURE / SPARK SCREEN -->
+    <!-- ======================== -->
+    <div id="screen-capture" class="screen">
+        <main class="screen-inner glow-bg-subtle">
+            <!-- Decoration -->
+            <div class="bg-blob blob-tl"></div>
+            <div class="bg-blob blob-br"></div>
+
+            <div class="content-col">
+                <header class="spark-header">
+                    <h1 class="spark-label">THE SPARK</h1>
+                </header>
+
+                <!-- Main Input -->
+                <div class="input-group">
+                    <input type="text" id="manual-input" class="spark-input"
+                        placeholder="Что нужно сделать прямо сейчас?" autocomplete="off" />
+                    <button class="input-mic" id="btn-voice" title="Голосовой ввод">
+                        <span class="material-symbols-outlined" id="mic-icon">mic</span>
+                    </button>
+                </div>
+
+                <!-- Voice transcript -->
+                <div class="transcript-box" id="voice-transcript" style="display:none;">
+                    <p id="transcript-text"></p>
+                </div>
+
+                <!-- Action Button -->
+                <div class="action-center">
+                    <button class="btn-primary" id="btn-send">
+                        <span>Вперёд</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+
+
+            </div>
+
+            <footer class="screen-footer">
+                <p class="footer-quote">Focus is a choice.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ======================== -->
+    <!--   DECOMPOSE SCREEN       -->
+    <!-- ======================== -->
+    <div id="screen-decompose" class="screen">
+        <main class="screen-inner glow-bg-center">
+            <div class="content-col">
+                <div class="thinking-dots" id="thinking-animation">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <h2 class="decompose-title" id="decompose-title">Разбираю на микро-шаги...</h2>
+                <p class="decompose-sub" id="decompose-subtitle">ИИ думает — это займёт пару секунд</p>
+
+                <!-- Ready state -->
+                <div class="ready-area" id="decompose-ready" style="display:none;">
+                    <div class="ready-icon-wrap">
+                        <div class="ready-icon-circle">
+                            <span class="material-symbols-outlined icon-xl text-primary">rocket_launch</span>
+                        </div>
+                    </div>
+                    <p class="ready-text">Готово! ИИ разбил задачу на простые шаги.</p>
+                    <p class="ready-hint">Ты увидишь только один шаг за раз — так проще.</p>
+                    <div class="spacer-md"></div>
+                    <button class="btn-primary btn-wide" id="btn-go">
+                        <span>Поехали!</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- Error state -->
+                <div class="ready-area" id="decompose-error" style="display:none;">
+                    <div class="ready-icon-wrap">
+                        <div class="ready-icon-circle" style="border-color:rgba(248,113,113,0.3);">
+                            <span class="material-symbols-outlined icon-xl" style="color:#f87171;">cloud_off</span>
+                        </div>
+                    </div>
+                    <p class="ready-text" id="decompose-error-text">Не удалось связаться с ИИ</p>
+                    <p class="ready-hint">Проверь API-ключ в настройках или попробуй ещё раз.</p>
+                    <div class="spacer-md"></div>
+                    <div class="modal-actions">
+                        <button class="btn-primary" id="btn-retry-ai">Повторить</button>
+                        <button class="btn-ghost" id="btn-fallback">Использовать шаблон</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ======================== -->
+    <!--   THE TUNNEL / FOCUS     -->
+    <!-- ======================== -->
+    <div id="screen-focus" class="screen">
+        <!-- Glowing progress bar at top -->
+        <div class="tunnel-progress-bar">
+            <div class="tunnel-progress-fill" id="focus-progress-fill"></div>
+        </div>
+
+        <main class="screen-inner-tunnel">
+            <!-- Step text — centered, huge -->
+            <div class="tunnel-step-area">
+                <h1 class="tunnel-step-text" id="focus-step-text">Включи воду</h1>
+            </div>
+
+            <!-- Bottom action area -->
+            <footer class="tunnel-footer">
+                <!-- Stats bar -->
+                <div class="tunnel-stats">
+                    <span class="tunnel-step-counter" id="focus-step-counter">Шаг 1</span>
+                    <span class="tunnel-timer" id="timer-display">0:00</span>
+                    <span class="tunnel-wins" id="focus-wins">🔥 0</span>
+                </div>
+                <!-- Massive Done Button -->
+                <button class="btn-done" id="btn-done">ГОТОВО</button>
+                <!-- Subtle links -->
+                <div class="tunnel-links">
+                    <a href="#" class="tunnel-link" id="btn-too-hard">Слишком сложно</a>
+                    <span class="tunnel-link-sep">·</span>
+                    <a href="#" class="tunnel-link" id="btn-pause">Перерыв</a>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Ambient toggle -->
+        <div class="ambient-toggle">
+            <button class="btn-ambient" id="btn-ambient" title="Фоновый звук">
+                <span class="material-symbols-outlined">music_note</span>
+                <span id="ambient-label">Тишина</span>
+            </button>
+        </div>
+
+        <!-- Sparkle canvas -->
+        <canvas id="sparkle-canvas" class="sparkle-canvas"></canvas>
+    </div>
+
+    <!-- ======================== -->
+    <!--   PAUSE SCREEN           -->
+    <!-- ======================== -->
+    <div id="screen-pause" class="screen">
+        <main class="screen-inner glow-bg-center">
+            <div class="content-col">
+                <div class="pause-icon-wrap">
+                    <div class="pause-icon-circle">
+                        <span class="material-symbols-outlined icon-xl text-primary">cloud</span>
+                    </div>
+                </div>
+                <h2 class="triumph-title">Всё нормально</h2>
+                <p class="triumph-sub">Я присмотрю за твоим прогрессом.<br>Возвращайся, когда будешь готов.</p>
+                <p class="pause-progress-info">Ты уже сделал <strong class="text-primary"
+                        id="pause-done-count">0</strong> шагов</p>
+                <div class="spacer-md"></div>
+                <button class="btn-primary btn-wide" id="btn-resume-pause">Я готов продолжить</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- ======================== -->
+    <!--   TOO HARD MODAL         -->
+    <!-- ======================== -->
+    <div class="modal-overlay" id="modal-too-hard" style="display:none;">
+        <div class="modal-card">
+            <span class="material-symbols-outlined icon-lg text-primary">psychology_alt</span>
+            <h3 class="modal-title">Давай упростим</h3>
+            <p class="modal-text" id="too-hard-text">Текущий шаг можно разбить ещё мельче. Хочешь?</p>
+            <div class="modal-actions">
+                <button class="btn-primary" id="btn-split-yes">Да, разбей</button>
+                <button class="btn-ghost" id="btn-split-no">Нет, попробую</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================== -->
+    <!--  THE TINY WIN / COMPLETE -->
+    <!-- ======================== -->
+    <div id="screen-complete" class="screen">
+        <main class="screen-inner glow-bg-center">
+            <!-- Subtle particles -->
+            <div class="particles-deco">
+                <div class="particle p1"></div>
+                <div class="particle p2"></div>
+                <div class="particle p3"></div>
+                <div class="particle p4"></div>
+            </div>
+            <div class="content-col">
+                <!-- Success Icon -->
+                <div class="triumph-icon-wrap">
+                    <div class="triumph-icon-circle">
+                        <span class="material-symbols-outlined icon-xl text-primary">auto_awesome</span>
+                    </div>
+                </div>
+                <h1 class="triumph-headline">
+                    Ты это сделал.<br><span class="text-primary">Горжусь тобой.</span>
+                </h1>
+                <p class="triumph-sub" id="complete-stats">
+                    Маленькая победа ведет к большим свершениям.
+                </p>
+                <div class="spacer-md"></div>
+                <button class="btn-primary btn-wide" id="btn-another">
+                    <span>Ещё задача</span>
+                </button>
+                <button class="btn-ghost" id="btn-view-art">Посмотреть арт дня</button>
+            </div>
+            <footer class="screen-footer">
+                <span class="material-symbols-outlined text-primary-muted">workspace_premium</span>
+                <span class="mission-label">МИССИЯ ЗАВЕРШЕНА</span>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ======================== -->
+    <!--   ART VIEW SCREEN        -->
+    <!-- ======================== -->
+    <div id="screen-art" class="screen">
+        <div class="art-view-container">
+            <canvas id="art-view-canvas" class="art-view-canvas"></canvas>
+            <div class="art-view-overlay">
+                <p class="art-view-label" id="art-view-label">Твой арт за сегодня — 0 микро-побед</p>
+                <button class="btn-ghost" id="btn-art-back">← Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================== -->
+    <!--   SETTINGS               -->
+    <!-- ======================== -->
+    <button class="settings-gear" id="settings-gear" title="Настройки">
+        <span class="material-symbols-outlined">settings</span>
+    </button>
+
+    <div class="modal-overlay" id="settings-panel" style="display:none;">
+        <div class="modal-card modal-settings">
+            <div class="settings-header">
+                <h3 class="modal-title">Настройки</h3>
+                <button class="btn-icon" id="btn-close-settings">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="settings-body">
+                <label class="setting-row">
+                    <span>Полноэкранный режим фокуса</span>
+                    <input type="checkbox" id="setting-fullscreen" class="toggle-input">
+                    <span class="toggle-slider"></span>
+                </label>
+                <label class="setting-row">
+                    <span>Авто-обнаружение «застрял» (2 мин)</span>
+                    <input type="checkbox" id="setting-stuck-detect" class="toggle-input" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+                <label class="setting-row">
+                    <span>Вибро-отклик</span>
+                    <input type="checkbox" id="setting-haptic" class="toggle-input" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+                <div class="setting-row">
+                    <span>Фоновый звук</span>
+                    <select id="setting-ambient-type" class="setting-select">
+                        <option value="none">Тишина</option>
+                        <option value="brown">Коричневый шум</option>
+                        <option value="rain">Дождь</option>
+                        <option value="ticking">Метроном</option>
+                    </select>
+                </div>
+                <div class="settings-divider"></div>
+                <div class="setting-row" id="settings-user-info" style="display:none;">
+                    <span id="settings-user-email" style="color:var(--primary-dim);font-size:0.78rem;"></span>
+                    <button class="btn-ghost btn-small" id="btn-logout">Выйти</button>
+                </div>
+                <div class="settings-danger">
+                    <button class="btn-ghost btn-small" id="btn-reset-data">Сбросить все данные</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================== -->
+    <!--   PAYWALL MODAL          -->
+    <!-- ======================== -->
+    <div class="modal-overlay" id="modal-paywall" style="display:none;">
+        <div class="modal-card">
+            <span class="material-symbols-outlined icon-lg text-primary">diamond</span>
+            <h3 class="modal-title">Лимит исчерпан</h3>
+            <p class="modal-text" id="paywall-text">Бесплатных декомпозиций в этом месяце больше нет.</p>
+            <div class="spacer-sm"></div>
+            <div class="paywall-plans">
+                <div class="paywall-plan">
+                    <span class="paywall-plan-name">Premium</span>
+                    <span class="paywall-plan-price">399 ₽/мес</span>
+                    <span class="paywall-plan-desc">Безлимитный ИИ</span>
+                </div>
+                <div class="paywall-plan paywall-plan-best">
+                    <span class="paywall-plan-badge">-31%</span>
+                    <span class="paywall-plan-name">Годовой</span>
+                    <span class="paywall-plan-price">3 290 ₽/год</span>
+                    <span class="paywall-plan-desc">274 ₽/мес</span>
+                </div>
+            </div>
+            <div class="spacer-sm"></div>
+            <button class="btn-primary btn-wide" id="btn-upgrade" disabled>Скоро!</button>
+            <button class="btn-ghost" id="btn-close-paywall">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

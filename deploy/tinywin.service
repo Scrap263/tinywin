@@ -1,0 +1,20 @@
+[Unit]
+Description=TinyWin FastAPI Backend
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/tinywin/backend
+Environment="PATH=/opt/tinywin/venv/bin"
+Environment="DEEPSEEK_API_KEY=sk-6d164dd41bc44ee0afc81cc94b7afd7f"
+Environment="JWT_SECRET=HELLO-DARKNESS-MY-OLD-FRIEND-KNOCKING-AT-MY-DOOR-AGAIN"
+Environment="DATABASE_URL=sqlite:////opt/tinywin/data/tinywin.db"
+ExecStart=/opt/tinywin/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000 --workers 2
+Restart=always
+RestartSec=5
+Environment="GOOGLE_CLIENT_ID=1060079316622-d0skr1p1e3uv5elva6mesl4ur0ics0iq.apps.googleusercontent.com"
+
+
+[Install]
+WantedBy=multi-user.target

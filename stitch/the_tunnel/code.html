@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4ade80",
+              "background-light": "#f6f8f7",
+              "background-dark": "#122017",
+            },
+            fontFamily: {
+              "display": ["Lexend", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display selection:bg-primary/30">
+<!-- Glowing Progress Bar at the top edge -->
+<div class="fixed top-0 left-0 w-full h-1 bg-background-dark/50 dark:bg-slate-900/50">
+<div class="h-full bg-primary shadow-[0_0_10px_rgba(74,222,128,0.8)]" style="width: 45%;"></div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center px-8 text-center">
+<h1 class="text-slate-900 dark:text-slate-100 text-[36px] md:text-[48px] font-bold leading-tight tracking-tight max-w-2xl">
+            Возьми одну грязную чашку
+        </h1>
+</main>
+<!-- Bottom Action Area -->
+<footer class="w-full max-w-2xl mx-auto px-4 pb-12 pt-4 flex flex-col items-center gap-6">
+<!-- Massive Glowing Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-black text-2xl py-8 rounded-xl shadow-[0_0_30px_rgba(74,222,128,0.3)] transition-all active:scale-[0.98] uppercase tracking-widest">
+            ГОТОВО
+        </button>
+<!-- Subtle Text Link -->
+<a class="text-slate-500 dark:text-primary/60 hover:text-primary text-sm font-medium transition-colors underline underline-offset-4 decoration-primary/30" href="#">
+            Слишком сложно
+        </a>
+</footer>
+</body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контакты и реквизиты — TinyWin</title>
+    <meta name="description" content="Контактная информация и реквизиты сервиса TinyWin.">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index.css" />
+    <style>
+        body {
+            overflow: auto;
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+            padding: 40px 24px 80px;
+            background: radial-gradient(circle at center top, rgba(74, 222, 128, 0.04) 0%, var(--bg-dark) 50%);
+        }
+
+        .page-container {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .page-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-500);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 32px;
+            transition: color 0.2s;
+        }
+
+        .page-back:hover {
+            color: var(--primary);
+        }
+
+        .page-back .material-symbols-outlined {
+            font-size: 1rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: var(--text-400);
+            font-weight: 300;
+            margin-bottom: 48px;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .contact-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            transition: border-color 0.2s, transform 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary-muted);
+            transform: translateY(-2px);
+        }
+
+        .contact-card .material-symbols-outlined {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-card-label {
+            font-size: 0.78rem;
+            color: var(--text-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .contact-card-value {
+            font-size: 0.95rem;
+            color: var(--text-100);
+            font-weight: 500;
+        }
+
+        .contact-card-value a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-card-value a:hover {
+            text-decoration: underline;
+        }
+
+        .requisites-section {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 32px 28px;
+            margin-bottom: 32px;
+        }
+
+        .requisites-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .requisites-title .material-symbols-outlined {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .requisites-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .requisites-row:last-child {
+            border-bottom: none;
+        }
+
+        .requisites-label {
+            font-size: 0.85rem;
+            color: var(--text-500);
+            font-weight: 400;
+        }
+
+        .requisites-value {
+            font-size: 0.9rem;
+            color: var(--text-100);
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .links-section {
+            margin-top: 32px;
+        }
+
+        .links-section a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-400);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-right: 24px;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .links-section a:hover {
+            color: var(--primary);
+        }
+
+        .links-section .material-symbols-outlined {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 500px) {
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrap">
+        <div class="page-container">
+            <a href="/" class="page-back">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Вернуться к приложению
+            </a>
+
+            <h1 class="page-title">Контакты</h1>
+            <p class="page-subtitle">Свяжитесь с нами по любому вопросу</p>
+
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <span class="material-symbols-outlined">mail</span>
+                    <div class="contact-card-label">Email</div>
+                    <div class="contact-card-value">
+                        <a href="mailto:cemenjpek@gmail.com">cemenjpek@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="material-symbols-outlined">schedule</span>
+                    <div class="contact-card-label">Время ответа</div>
+                    <div class="contact-card-value">В течение 24 часов</div>
+                </div>
+            </div>
+
+            <!-- Реквизиты -->
+            <div class="requisites-section">
+                <div class="requisites-title">
+                    <span class="material-symbols-outlined">description</span>
+                    Реквизиты
+                </div>
+
+                <!-- TODO: Замените на ваши реальные данные -->
+                <div class="requisites-row">
+                    <span class="requisites-label">ФИО</span>
+                    <span class="requisites-value">Алексеев Антон Алексеевич</span>
+                </div>
+                <div class="requisites-row">
+                    <span class="requisites-label">Статус</span>
+                    <span class="requisites-value">Самозанятый (НПД)</span>
+                </div>
+                <div class="requisites-row">
+                    <span class="requisites-label">ИНН</span>
+                    <span class="requisites-value">120803333877</span>
+                </div>
+                <div class="requisites-row">
+                    <span class="requisites-label">Email</span>
+                    <span class="requisites-value">cemenjpek@gmail.com</span>
+                </div>
+                <div class="requisites-row">
+                    <span class="requisites-label">Сайт</span>
+                    <span class="requisites-value">tinywin.ru</span>
+                </div>
+            </div>
+
+            <div class="links-section">
+                <a href="/pricing">
+                    <span class="material-symbols-outlined">payments</span>
+                    Тарифы
+                </a>
+                <a href="/terms">
+                    <span class="material-symbols-outlined">gavel</span>
+                    Условия использования
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

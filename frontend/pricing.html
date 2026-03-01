@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тарифы — TinyWin</title>
+    <meta name="description"
+        content="Тарифы TinyWin: бесплатный план и Premium подписка с безлимитным ИИ-дроблением задач.">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index.css" />
+    <style>
+        body {
+            overflow: auto;
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+            padding: 40px 24px 80px;
+            background: radial-gradient(circle at center top, rgba(74, 222, 128, 0.06) 0%, var(--bg-dark) 60%);
+        }
+
+        .page-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-500);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-bottom: 32px;
+            transition: color 0.2s;
+        }
+
+        .page-back:hover {
+            color: var(--primary);
+        }
+
+        .page-back .material-symbols-outlined {
+            font-size: 1rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-400);
+            font-weight: 300;
+            margin-bottom: 48px;
+        }
+
+        /* Plans grid */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 64px;
+        }
+
+        .plan-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .plan-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .plan-card.featured {
+            border-color: var(--primary-muted);
+            background: rgba(74, 222, 128, 0.04);
+            box-shadow: 0 0 40px rgba(74, 222, 128, 0.08);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--bg-dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .plan-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .plan-desc {
+            font-size: 0.8rem;
+            color: var(--text-500);
+            margin-bottom: 20px;
+        }
+
+        .plan-price {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .plan-price .currency {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .plan-period {
+            font-size: 0.78rem;
+            color: var(--text-500);
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            flex: 1;
+            margin-bottom: 24px;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-300);
+            padding: 6px 0;
+        }
+
+        .plan-features li .material-symbols-outlined {
+            font-size: 1rem;
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .plan-features li.disabled {
+            color: var(--text-500);
+            opacity: 0.5;
+        }
+
+        .plan-features li.disabled .material-symbols-outlined {
+            color: var(--text-500);
+        }
+
+        .plan-btn {
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .plan-btn-free {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-300);
+        }
+
+        .plan-btn-free:hover {
+            border-color: var(--primary-muted);
+            color: var(--primary);
+        }
+
+        .plan-btn-primary {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: var(--glow-md);
+        }
+
+        .plan-btn-primary:hover {
+            transform: scale(1.03);
+        }
+
+        .plan-btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-muted);
+            color: var(--primary);
+        }
+
+        .plan-btn-outline:hover {
+            background: var(--primary-ghost);
+        }
+
+        .plan-savings {
+            font-size: 0.72rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        /* FAQ */
+        .faq-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 20px 0;
+        }
+
+        .faq-q {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-100);
+        }
+
+        .faq-a {
+            font-size: 0.88rem;
+            color: var(--text-400);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrap">
+        <div class="page-container">
+            <a href="/" class="page-back">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Вернуться к приложению
+            </a>
+
+            <h1 class="page-title">Тарифы Tiny<span class="text-primary">Win</span></h1>
+            <p class="page-subtitle">Начни бесплатно. Перейди на Premium, когда будешь готов.</p>
+
+            <div class="plans-grid">
+                <!-- Free -->
+                <div class="plan-card">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-desc">Для знакомства</div>
+                    <div class="plan-price">0 <span class="currency">₽</span></div>
+                    <div class="plan-period">навсегда</div>
+                    <ul class="plan-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> 3 ИИ-декомпозиции в месяц</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> 2 дробления шагов в месяц</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Голосовой ввод</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Фоновые звуки</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Генеративный арт</li>
+                        <li class="disabled"><span class="material-symbols-outlined">cancel</span> Кастомные звуки
+                            успеха</li>
+                    </ul>
+                    <a href="/" class="plan-btn plan-btn-free">Начать бесплатно</a>
+                </div>
+
+                <!-- Premium Monthly -->
+                <div class="plan-card featured">
+                    <div class="plan-badge">Популярный</div>
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-desc">Безлимитный ИИ</div>
+                    <div class="plan-price">399 <span class="currency">₽</span></div>
+                    <div class="plan-period">в месяц</div>
+                    <ul class="plan-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> <strong>Безлимитное</strong>
+                            ИИ-дробление</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> <strong>Безлимитное</strong>
+                            дробление шагов</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Голосовой ввод</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Фоновые звуки</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Генеративный арт</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Кастомные звуки успеха</li>
+                    </ul>
+                    <button class="plan-btn plan-btn-primary" onclick="alert('Оплата скоро будет доступна!')">Подключить
+                        Premium</button>
+                </div>
+
+                <!-- Yearly -->
+                <div class="plan-card">
+                    <div class="plan-name">Годовой</div>
+                    <div class="plan-desc">Максимальная выгода</div>
+                    <div class="plan-price">3 290 <span class="currency">₽</span></div>
+                    <div class="plan-period">в год</div>
+                    <div class="plan-savings">Экономия 31% — всего 274 ₽/мес</div>
+                    <ul class="plan-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> Всё из Premium</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> <strong>Скидка 31%</strong> от
+                            месячной цены</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Приоритетная поддержка</li>
+                    </ul>
+                    <button class="plan-btn plan-btn-outline" onclick="alert('Оплата скоро будет доступна!')">Подключить
+                        Годовой</button>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <h2 class="faq-title">Частые вопросы</h2>
+
+            <div class="faq-item">
+                <div class="faq-q">Что такое TinyWin?</div>
+                <div class="faq-a">TinyWin — это веб-приложение, которое помогает людям с СДВГ и исполнительной
+                    дисфункцией справляться с задачами. Искусственный интеллект разбивает любую задачу на микро-шаги —
+                    маленькие физические действия длительностью до 30 секунд.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Как работает оплата?</div>
+                <div class="faq-a">Оплата происходит через Систему быстрых платежей (СБП) — вы сканируете QR-код или
+                    переходите в приложение банка. Обработка платежей осуществляется через ЮKassa. Подписка активируется
+                    мгновенно после оплаты.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Могу ли я отменить подписку?</div>
+                <div class="faq-a">Да, подписку можно отменить в любой момент через настройки аккаунта. Доступ к
+                    Premium-функциям сохранится до конца оплаченного периода. Автоматическое продление можно отключить.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Что входит в бесплатный тариф?</div>
+                <div class="faq-a">Бесплатный тариф включает 3 ИИ-декомпозиции задач и 2 дробления шагов в месяц. Этого
+                    достаточно, чтобы попробовать сервис. Голосовой ввод, фоновые звуки и генеративный арт доступны
+                    без ограничений.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Возвращаете ли вы деньги?</div>
+                <div class="faq-a">Если вас что-то не устроило, напишите нам в течение 7 дней после оплаты — мы вернём
+                    полную стоимость подписки без вопросов.</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

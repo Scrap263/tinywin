@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#4ade80",
+                "background-light": "#f6f8f7",
+                "background-dark": "#122017",
+                "slate-deep": "#0f172a",
+                "charcoal-dark": "#121212",
+              },
+              fontFamily: {
+                "display": ["Lexend", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .bg-gradient-custom {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<!-- Screen 1: The Spark (The Entry Point) -->
+<main class="relative flex h-screen w-full flex-col items-center justify-center bg-gradient-custom p-6">
+<!-- Decoration / Abstract Background Element -->
+<div class="absolute inset-0 overflow-hidden pointer-events-none">
+<div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-blue-900/20 blur-[150px] rounded-full"></div>
+</div>
+<div class="w-full max-w-[480px] z-10 flex flex-col items-center">
+<!-- Branding Header (Subtle) -->
+<header class="mb-12 text-center">
+<h1 class="text-slate-100/40 tracking-[0.2em] text-sm font-light uppercase">The Spark</h1>
+</header>
+<!-- Main Input Area -->
+<div class="w-full space-y-6">
+<div class="relative group">
+<div class="flex flex-col min-w-40 flex-1">
+<div class="flex w-full flex-1 items-stretch rounded-xl shadow-2xl transition-all duration-300 group-focus-within:ring-2 group-focus-within:ring-primary/50">
+<!-- Large Elegant Input -->
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border-none bg-slate-800/50 backdrop-blur-md text-slate-100 focus:outline-0 focus:ring-0 h-20 placeholder:text-slate-400/60 pl-8 pr-2 text-xl font-light leading-normal rounded-r-none" placeholder="Что нужно сделать прямо сейчас?" type="text" value=""/>
+<!-- Voice Input -->
+<div class="text-slate-400 bg-slate-800/50 backdrop-blur-md flex items-center justify-center pr-6 rounded-r-xl border-l-0 cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">mic</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="flex justify-center pt-4">
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-primary text-slate-900 hover:scale-105 transition-transform active:scale-95 gap-3 text-lg font-semibold shadow-lg shadow-primary/20">
+<span class="truncate">Forward</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Footer Quote or Minimal Hint -->
+<footer class="mt-24 text-center">
+<p class="text-slate-500 font-light text-sm italic">Focus is a choice.</p>
+</footer>
+</div>
+</main>
+</body></html>
