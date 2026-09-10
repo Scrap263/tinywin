@@ -151,7 +151,7 @@
         stuckDetect: true,
         haptic: true,
         ambientType: 'none',
-        apiKey: 'sk-6d164dd41bc44ee0afc81cc94b7afd7f',
+        apiKey: '',
         apiUrl: 'https://api.deepseek.com',
         apiModel: 'deepseek-chat',
     };
